@@ -20,7 +20,7 @@ const App = () => {
     setOperation('');
   };
 
-  /* OPERAÇÃO: SOMA */
+/* OPERAÇÃO: SOMA */
   const handleSumNumbers = () => {
 
     if(firstNumber === '0'){
@@ -34,7 +34,7 @@ const App = () => {
     }
   }
 
-  /* OPERAÇÃO: SUBTRAÇÃO */
+/* OPERAÇÃO: SUBTRAÇÃO */
   const handleMinusNumbers = () => {
 
     if(firstNumber === '0'){
@@ -48,7 +48,7 @@ const App = () => {
     }
   }
     
-  /* OPERAÇÃO: DIVISÃO */
+/* OPERAÇÃO: DIVISÃO */
   const handleDivisionNumbers = () => {
 
     if(firstNumber === '0'){
@@ -61,6 +61,20 @@ const App = () => {
       setOperation('');
     }
   }
+
+/* OPERAÇÃO: MULTIPLICAÇÃO */
+const handleVersusNumbers = () => {
+
+  if(firstNumber === '0'){
+    setFirstNumber(String(currentNumber));
+    setCurrentNumber('0');
+    setOperation('*');
+  } else {
+    const versus = Number(firstNumber) * Number(currentNumber);
+    setCurrentNumber(String(versus));
+    setOperation('');
+  }
+}
 
 /* OPERAÇÃO: IGUAL */
   const handleEquals = () => {
@@ -76,12 +90,14 @@ const App = () => {
         case '/':
           handleDivisionNumbers();
           break;
+        case '*':
+          handleVersusNumbers();
+          break;
         default: 
           break;
       } 
     }
   }
-
 
   return (
     <Container> 
@@ -97,7 +113,7 @@ const App = () => {
           <Button label="4" onClick={() => handleAddNumber('4')}/>
           <Button label="5" onClick={() => handleAddNumber('5')}/>
           <Button label="6" onClick={() => handleAddNumber('6')}/>
-          <Button label="x" onClick={() => handleAddNumber('*')}/>
+          <Button label="x" onClick={handleVersusNumbers}/>
         </Row>
         <Row>
           <Button label="1" onClick={() => handleAddNumber('1')}/>
