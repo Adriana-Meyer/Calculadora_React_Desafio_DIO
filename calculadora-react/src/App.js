@@ -7,14 +7,64 @@ import { useState } from 'react';
 const App = () => {
   const [currentNumber, setCurrentNumber] = useState(0);
   const [firstNumber, setFirstNumber] = useState('0');
+  const [operation, setOperation] = useState('');
 
   const handleAddNumber = (number) => {
-    setCurrentNumber(prev => `${number}${prev === '0' ? '' : prev}`)
+    setCurrentNumber(prev => `${prev === '0' ? '' : prev}${number}`)
   };
 
+/* OPERAÇÃO: LIMPAR */
   const handleOnClear = () => {
-    setCurrentNumber('0')
+    setCurrentNumber('0');
+    setFirstNumber('0');
+    setOperation('');
   };
+
+  /* OPERAÇÃO: SOMA */
+  const handleSumNumbers = () => {
+
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('+');
+    } else {
+      const sum = Number(firstNumber) + Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation('');
+    }
+  }
+
+    /* OPERAÇÃO: SUBTRAÇÃO */
+    const handleMinusNumbers = () => {
+
+      if(firstNumber === '0'){
+        setFirstNumber(String(currentNumber));
+        setCurrentNumber('0');
+        setOperation('-');
+      } else {
+        const sub = Number(firstNumber) - Number(currentNumber);
+        setCurrentNumber(String(sub));
+        setOperation('');
+      }
+    }
+
+/* OPERAÇÃO: IGUAL */
+  const handleEquals = () => {
+
+    if(firstNumber !== '0' && operation !== '' && currentNumber !== '0'){
+      switch(operation) {
+        case '+':
+          handleSumNumbers();
+          break;
+        case '-':
+          handleMinusNumbers();
+          break;
+        default: 
+          break;
+      } 
+    }
+  }
+
 
   return (
     <Container> 
@@ -39,10 +89,10 @@ const App = () => {
           <Button label="/" onClick={() => handleAddNumber('/')}/>
         </Row>
         <Row>
-          <Button label="-" onClick={() => handleAddNumber('-')}/>
+          <Button label="-" onClick={handleMinusNumbers}/>
           <Button label="0" onClick={() => handleAddNumber('0')}/>
-          <Button label="+" onClick={() => handleAddNumber('+')}/>
-          <Button label="=" onClick={() => handleAddNumber('=')}/>
+          <Button label="+" onClick={handleSumNumbers}/>
+          <Button label="=" onClick={handleEquals}/>
         </Row>
       </Content>
     </Container>
