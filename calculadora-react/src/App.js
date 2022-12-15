@@ -34,19 +34,33 @@ const App = () => {
     }
   }
 
-    /* OPERAÇÃO: SUBTRAÇÃO */
-    const handleMinusNumbers = () => {
+  /* OPERAÇÃO: SUBTRAÇÃO */
+  const handleMinusNumbers = () => {
 
-      if(firstNumber === '0'){
-        setFirstNumber(String(currentNumber));
-        setCurrentNumber('0');
-        setOperation('-');
-      } else {
-        const sub = Number(firstNumber) - Number(currentNumber);
-        setCurrentNumber(String(sub));
-        setOperation('');
-      }
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('-');
+    } else {
+      const sub = Number(firstNumber) - Number(currentNumber);
+      setCurrentNumber(String(sub));
+      setOperation('');
     }
+  }
+    
+  /* OPERAÇÃO: DIVISÃO */
+  const handleDivisionNumbers = () => {
+
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('/');
+    } else {
+      const division = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(division));
+      setOperation('');
+    }
+  }
 
 /* OPERAÇÃO: IGUAL */
   const handleEquals = () => {
@@ -58,6 +72,9 @@ const App = () => {
           break;
         case '-':
           handleMinusNumbers();
+          break;
+        case '/':
+          handleDivisionNumbers();
           break;
         default: 
           break;
@@ -86,7 +103,7 @@ const App = () => {
           <Button label="1" onClick={() => handleAddNumber('1')}/>
           <Button label="2" onClick={() => handleAddNumber('2')}/>
           <Button label="3" onClick={() => handleAddNumber('3')}/>
-          <Button label="/" onClick={() => handleAddNumber('/')}/>
+          <Button label="/" onClick={handleDivisionNumbers}/>
         </Row>
         <Row>
           <Button label="-" onClick={handleMinusNumbers}/>
